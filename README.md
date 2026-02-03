@@ -1,72 +1,85 @@
-# 💰 Income Prediction Using H2O Random Forest
+# 🚀 Machine Learning Featured Projects
 
-This project implements a **supervised machine learning pipeline** for predicting individual income categories (`<=50K` or `>50K`) using the **H2O Random Forest** algorithm.  
-The objective is to train a robust model on census data, evaluate its performance using F1-score, and generate predictions for unseen test data.
-
----
-
-## 📂 Dataset Overview
-
-- **Training Data**: `train.csv`  
-  - Contains demographic and economic features such as age, education, occupation, and hours worked per week  
-  - Target column: `income` (binary classification)
-- **Test Data**: `test.csv`  
-  - Same features as training data (without target)  
-- **Task**: Binary classification (`<=50K` vs `>50K`)
+This repository contains multiple **practical machine learning projects** tackling real-world tasks.  
+Projects include **handwritten digit classification (MNIST)**, **income prediction**, and **transportation-related predictions** (ticket cancellation and trip purpose).
 
 ---
 
-## 🧩 Project Workflow
+## 📂 Projects Overview
 
-1. **Data Loading & Inspection**  
-   - Load CSV datasets using **Pandas**  
-   - Explore data distribution and feature types
+### 1️⃣ Handwritten Digit Classification – MNIST
 
-2. **Data Preprocessing**  
-   - Handle categorical features (H2O automatically encodes factors)  
-   - Split training data into training and validation sets
+**Objective:** Classify handwritten digits (0–9) from 28x28 grayscale images.
 
-3. **H2O Initialization & Model Setup**  
-   - Initialize H2O cluster  
-   - Convert datasets to `H2OFrame`  
-   - Configure **H2ORandomForestEstimator** with:
-     - `ntrees = 100`  
-     - `sample_rate = 0.7`
+**Dataset:**
+- `mnist_train.csv` (784 pixel columns + label)
+- `mnist_test.csv` (784 pixel columns)
 
-4. **Model Training**  
-   - Train on the training H2OFrame  
-   - Monitor progress and convergence
+**Workflow:**
+- Load and inspect data
+- Train-test split
+- MLPClassifier training (scikit-learn)
+- Performance evaluation using **weighted F1-score**
+- Test data predictions for submission
 
-5. **Model Evaluation**  
-   - Generate predictions on validation set  
-   - Convert predictions to numeric labels (`0` for `<=50K`, `1` for `>50K`)  
-   - Evaluate using **F1-score** for balanced performance assessment
+**Tools & Libraries:** Python, Pandas, NumPy, scikit-learn, Matplotlib
 
-6. **Test Data Prediction**  
-   - Apply the trained model on unseen test data  
-   - Generate structured DataFrame ready for submission or further analysis
+---
+
+### 2️⃣ Income Prediction
+
+**Objective:** Predict whether an individual earns `<=50K` or `>50K`.
+
+**Dataset:** `train.csv`, `test.csv`
+
+**Workflow:**
+- Data preprocessing and feature handling
+- Model training using **H2O Random Forest**
+- Evaluation using **F1-score** (~0.725)
+- Prediction on unseen test data
+
+**Tools & Libraries:** Python, Pandas, NumPy, H2O.ai, scikit-learn
+
+---
+
+### 3️⃣ Transportation Prediction
+
+This project contains **two prediction tasks**:
+
+#### a) Cancel Prediction
+
+- **Goal:** Predict ticket cancellations
+- **Features:** Vehicle info, pricing, discount usage, family/group flags
+- **Model:** XGBoost Classifier
+- **Evaluation:** F1-score ≈ 0.943
+- **Output:** Submission-ready predictions for test bookings
+
+#### b) Trip Reason Prediction
+
+- **Goal:** Predict trip purpose (`Work` or `Int`)
+- **Features:** Vehicle type/class, temporal features (month/hour), demographics
+- **Model:** XGBoost Classifier
+- **Evaluation:** F1-score ≈ 0.806
+- **Output:** Test data predictions
+
+**Tools & Libraries:** Python, Pandas, NumPy, scikit-learn, XGBoost
 
 ---
 
 ## 🛠️ Tools & Technologies
 
-- **Programming Language**: Python  
-- **Data Handling**: Pandas, NumPy  
-- **Machine Learning**: H2O.ai, H2ORandomForestEstimator  
-- **Evaluation Metrics**: F1-score (weighted/binary)
+- Python 3.x
+- Data manipulation: Pandas, NumPy
+- Machine learning: scikit-learn, XGBoost, H2O.ai
+- Data preprocessing: MinMaxScaler, LabelEncoder, One-Hot Encoding
+- Evaluation metrics: F1-score, classification report, confusion matrix
 
 ---
 
-## 📊 Key Insights
+## 🎯 Learning Outcomes
 
-- Random Forests handle **categorical and numerical features** effectively  
-- Using H2O allows **distributed and efficient training** for large datasets  
-- Model achieved **F1-score ≈ 0.725** on validation set, demonstrating balanced precision and recall  
-
----
-
-## 🎯 Conclusion
-
-This project provides a **complete end-to-end workflow** for income prediction from census data:  
-from preprocessing, H2O-based model training, evaluation, to test data prediction.  
-It demonstrates practical usage of **H2O Random Forest** for scalable, high-performance classification tasks with tabular data.
+- End-to-end ML pipelines for multiple tasks
+- Handling missing values and feature engineering for structured data
+- Scaling and encoding for numeric and categorical features
+- Training and evaluating models on tabular and image data
+- Prediction on unseen datasets with reproducible workflows
